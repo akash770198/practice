@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather-app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="vibrate-2">
+            <h1>Weather-Tales</h1>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Enter location" spellcheck="false">
+            <button><img src="images/search.png"></button>
+        </div>
+
+        <div class="city-buttons">
+            <button onclick="checkWeatherAndHideIntro('New Delhi')" class="heartbeat" id="nd">New Delhi</button>
+            <button onclick="checkWeatherAndHideIntro('Bangalore')" class="heartbeat" id="bg">Bangalore</button>
+            <button onclick="checkWeatherAndHideIntro('Kolkata')" class="heartbeat" id="kk">Kolkata</button>
+            <button onclick="checkWeatherAndHideIntro('Mumbai')" class="heartbeat" id="mb">Mumbai</button>
+        </div>
+
+        <div class="focus-in-expand">
+            <h1>Get ready !</h1>
+            <h2>To unlock the secrets of skies</h2>
+        </div>
+
+        <div class="weather">
+            <img src="images/rain.png" class="weather-icon">
+            <h1 class="temp">22°c</h1>
+            <h2 class="city">New York</h2>
+
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="wind">15km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="error-popup">
+        <p>Oops, no results found...Please enter valid location</p>
+    </div>
+
+
+    <script>
+
+        const apiKey = "bcb4a0c57b8cebef025a39edf3d72697";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon");
+
+        async function checkWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+            if (response.status == 404) {
+                document.querySelector(".error-popup").classList.add("show");
+                document.querySelector(".weather").style.display = "none";
+
+                setTimeout(() => {
+                    document.querySelector(".error-popup").classList.remove("show");
+                }, 2000);
+            }
+
+            else {
+                document.querySelector(".error-popup").classList.remove("show");
+
+                var data = await response.json();
+
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+
+                if (data.weather[0].main == "Clouds") {
+                    weatherIcon.src = "images/clouds.png";
+                }
+
+                else if (data.weather[0].main == "Clear") {
+                    weatherIcon.src = "images/clear.png";
+                }
+
+                else if (data.weather[0].main == "Rain") {
+                    weatherIcon.src = "images/rain.png";
+                }
+
+                else if (data.weather[0].main == "Drizzle") {
+                    weatherIcon.src = "images/drizzle.png";
+                }
+
+                else if (data.weather[0].main == "Mist") {
+                    weatherIcon.src = "images/mist.png";
+                }
+
+                document.querySelector(".weather").style.display = "block";
+                // document.querySelector(".error").style.display = "none";
+            }
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const intro = document.querySelector(".focus-in-expand");
+
+             // Checking if there's a search query in the URL (e.g., from refreshing the page after a search)
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get("q");
+
+            if (searchQuery) {
+                // If a search query exists, hiding the intro
+                intro.style.display = "none";
+            }
+
+            function search() {
+            const city = searchBox.value.trim();
+            if(city) {
+                // Hiding the intro when the user performs a search
+                intro.style.display = "none";
+                checkWeather(city);
+            }
+        }
+
+        searchBox.addEventListener("keypress", function(event) {
+            if(event.key == "Enter") {
+                search();
+            }
+        })
+
+        searchBtn.addEventListener("click", search);
+
+        })
+
+        function checkWeatherAndHideIntro(city) {
+            document.querySelector(".focus-in-expand").style.display = "none";
+            checkWeather(city);
+        }
+
+       
+
+
+    </script>
+</body>
+
+</html>

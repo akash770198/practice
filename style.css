@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #222;
+}
+
+.card {
+    width: 100vw;
+    height: 100vh;
+    background-image: url(images/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    border-radius: 20px;
+    padding: 25px 35px;
+    text-align: center;
+    position: relative;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black overlay */
+    border-radius: 20px;
+}
+
+/* Adjusting the z-index to ensure the overlay is behind the content */
+.search,
+.city-buttons,
+.weather-icon,
+.temp,
+.wind,
+.details,
+.city {
+    position: relative;
+    z-index: 2;
+}
+
+.search {
+    width: 800px;
+    margin: 18px;
+    display: flex;
+    margin-left: 23%;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5px;
+}
+
+.search input {
+    border: 2px solid transparent;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 20px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+    transition: border-color 0.5ms ease;
+}
+
+.search input:hover {
+    border-color: black;
+}
+
+.search button {
+    border: 0px;
+    outline: 0;
+    background: whitesmoke;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search button:hover {
+    border: 2px solid black;
+}
+
+.search button:active {
+    transform: scale(0.90);
+}
+
+.search button img {
+    width: 25px;
+}
+
+.Weather-icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+.Weather h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.Weather h2 {
+    font-size: 40px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.details {
+    /* border: 1px solid yellow; */
+    height: 3.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+
+.details p {
+    font-size: larger;
+}
+
+.col {
+    height: 95%;
+    /* border: 1px solid yellow; */
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.humidity,
+.wind {
+    font-size: 28px;
+    margin-top: -6px;
+}
+
+.weather {
+    display: none;
+    font-size: larger;
+}
+
+.error-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(177, 24, 24, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    display: none;
+}
+
+.error-popup p {
+    margin: 0;
+}
+
+.error-popup.show {
+    display: block;
+}
+
+.city-buttons {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+    z-index: 1;
+    margin-top: 30px;
+}
+
+.heartbeat {
+    /* -webkit-animation: heartbeat 1.5s ease-in-out infinite both; */
+    animation: heartbeat 6s ease-in-out infinite both;
+    border: 2px solid white;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 40px;
+    margin: 100px;
+    color: white;
+    font-size: larger;
+}
+
+.city-buttons button:hover {
+    opacity: 0.8;
+    border: 3px solid black;
+}
+
+
+@-webkit-keyframes heartbeat {
+    from {
+        transform: scale(1);
+        transform-origin: center center;
+        animation-timing-function: ease-out;
+    }
+
+    10% {
+        transform: scale(0.91);
+        animation-timing-function: ease-in;
+    }
+
+    17% {
+        transform: scale(0.98);
+        animation-timing-function: ease-out;
+    }
+
+    33% {
+        transform: scale(0.87);
+        animation-timing-function: ease-in;
+    }
+
+    45% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+    }
+}
+
+@keyframes heartbeat {
+    from {
+        transform: scale(1);
+        transform-origin: center center;
+        animation-timing-function: ease-out;
+    }
+
+    10% {
+        transform: scale(0.91);
+        animation-timing-function: ease-in;
+    }
+
+    17% {
+        transform: scale(0.98);
+        animation-timing-function: ease-out;
+    }
+
+    33% {
+        transform: scale(0.87);
+        animation-timing-function: ease-in;
+    }
+
+    45% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+    }
+}
+
+#nd {
+    background-image: url(images/nd.jpg);
+}
+
+#mb {
+    background-image: url(images/mb.jpg);
+}
+
+#kk {
+    background-image: url(images/kk.jpg);
+}
+
+#bg {
+    background-image: url(images/bg.jpg);
+}
+
+.focus-in-expand h1 {
+    padding-bottom: 6px;
+}
+
+.focus-in-expand {
+    animation: focus-in-expand 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    padding: 60px;
+    margin: 60px;
+    position: relative;
+}
+
+@-webkit-keyframes focus-in-expand {
+    0% {
+        letter-spacing: -0.5em;
+        filter: blur(12px);
+        opacity: 0;
+    }
+
+    100% {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes focus-in-expand {
+    0% {
+        letter-spacing: -0.5em;
+        filter: blur(12px);
+        opacity: 0;
+    }
+
+    100% {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+.vibrate-2 {
+    animation: vibrate-2 0.6s linear infinite both;
+    padding-bottom: 25px;
+    color: rgb(28, 27, 27);
+}
+@-webkit-keyframes vibrate-2 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(2px, -2px);
+    }
+
+    40% {
+        transform: translate(2px, 2px);
+    }
+
+    60% {
+        transform: translate(-2px, 2px);
+    }
+
+    80% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes vibrate-2 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(2px, -2px);
+    }
+
+    40% {
+        transform: translate(2px, 2px);
+    }
+
+    60% {
+        transform: translate(-2px, 2px);
+    }
+
+    80% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+/* Add this at the end of your existing CSS */
+
+@media only screen and (max-width: 600px) {
+    /* Adjustments for smaller screens */
+    .card {
+        padding: 15px;
+    }
+
+    .search {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .search input {
+        width: 70%;
+    }
+
+    .search button {
+        width: 25%;
+    }
+
+    .city-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .city-buttons button {
+        margin: 10px;
+    }
+}
